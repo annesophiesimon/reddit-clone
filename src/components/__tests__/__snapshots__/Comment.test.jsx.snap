@@ -1,0 +1,18 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Comment renders correctly 1`] = `
+<div
+  className="bg-white shadow-lg p-5 m-2 rounded-xl md:w-5/6"
+>
+  <div>
+    <p />
+    <p>
+       
+       hours ago
+    </p>
+  </div>
+  <p>
+     
+  </p>
+</div>
+`;

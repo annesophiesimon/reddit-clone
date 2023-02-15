@@ -1,23 +1,27 @@
-import logo from './logo.svg';
-import './App.css';
+// import Categories from './components/Categories';
+// import Header from './components/Header';
+// import Post from './components/Post';
+// import Comment from './components/Comment';
+import Home from './pages/Home';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="bg-slate-50 h-screen">
+      <Home />
+      {/* <Header />
+      <div className="container mx-auto">
+        <main className="mt-8 flex flex-col md:flex-row">
+          <Post
+            title="This is my title"
+            content="blblablablabla"
+            name="Geraldine"
+            time="6"
+            imgUrl="https://www.tutorialspoint.com/assets/questions/media/426142-1668760872.png"
+          />
+          <Categories />
+        </main>
+        <Comment />
+      </div> */}
     </div>
   );
 }

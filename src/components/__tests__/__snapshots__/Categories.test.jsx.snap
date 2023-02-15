@@ -1,0 +1,16 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Categories renders correctly 1`] = `
+<aside
+  className="shadow-lg rounded-xl md:w-1/6"
+>
+  <h1
+    className="font-bold p-2"
+  >
+    Categories
+  </h1>
+  <ul
+    className="my-2"
+  />
+</aside>
+`;
