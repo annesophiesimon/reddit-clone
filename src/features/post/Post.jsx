@@ -5,12 +5,13 @@ import { fetchPosts } from './postSlice';
 import { useAppSelector, useAppDispatch } from '../../app/hooks';
 import { useEffect } from 'react';
 
-const Post = () => {
+const Post = (props) => {
+  const { subreddit } = props;
   const { posts, isLoading } = useAppSelector((state) => state.post);
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    dispatch(fetchPosts('r/sewing')); // remove hard coded
+    dispatch(fetchPosts(subreddit));
   }, []);
 
   if (isLoading) {
