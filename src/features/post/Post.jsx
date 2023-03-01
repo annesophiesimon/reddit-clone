@@ -21,8 +21,8 @@ const Post = () => {
       {posts.length > 0 ? (
         posts
           .filter((post) => checkURL(post.url))
-          .map((post) => (
-            <div key={post.id} className=" container mx-auto  bg-white">
+          .map((post, index) => (
+            <div key={index} className="container mx-auto  bg-white">
               <div className="flex py-5 shadow-lg border border-grey-50 rounded-xl max-w-[700px] mb-10">
                 <div className="flex flex-col">
                   <div className="flex items-start">
@@ -46,7 +46,7 @@ const Post = () => {
                   <div className="flex justify-between text-sm text-slate-500 px-5">
                     <Vote ups={post.ups} />
                     <button>
-                      <p value={post.id}>
+                      <p>
                         {post.num_comments} {post.num_comments > 1 ? `comments` : `comment`}
                       </p>
                     </button>
