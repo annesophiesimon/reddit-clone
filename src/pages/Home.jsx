@@ -1,17 +1,16 @@
 import Header from '../components/Header';
 import Post from '../components/Post';
 import Categories from '../components/Categories';
-import Comment from '../components/Comment';
 import { useEffect, useState } from 'react';
 import { useAppDispatch, useAppSelector } from '../app/hooks';
-import { fetchPosts, fetchPostsByTerm } from '../features/post/postSlice';
+// eslint-disable-next-line no-unused-vars
+import { fetchPosts, fetchPostsByTerm, fetchComments } from '../features/post/postSlice';
 import { fetchSubreddit } from '../features/subreddit/subredditSlice';
-import { convertTime, checkURL } from '../helpers/index';
+import { checkURL } from '../helpers/index';
 
 const Home = () => {
   const { posts, isLoading, isError, message } = useAppSelector((state) => state.post);
   const { subreddits, isCategoriesLoading } = useAppSelector((state) => state.subreddit);
-
   const dispatch = useAppDispatch();
 
   const [term, setTerm] = useState('');
@@ -30,6 +29,15 @@ const Home = () => {
     dispatch(fetchPostsByTerm(term));
   };
 
+  const onToggleComments = (e) => {
+    console.log('test', e.target);
+    //dispatch(fetchComments(permalink));
+  };
+
+  // const handleOnClick = (permalink) => {
+  //   dispatch(fetchComments(permalink));
+  //   setIsHidden(!isHidden);
+  // };
   useEffect(() => {
     // if (isError) {
     //   console.log(message);
@@ -44,23 +52,13 @@ const Home = () => {
   return (
     <>
       <Header handleChange={handleChange} handleSubmit={handleSubmit} term={term} />
-      <div className="container mx-auto">
-        <main className="mt-8 flex flex-col md:flex-row">
-          <div className="flex flex-col w-full">
+      <div className="container mx-auto max-w-[1100px]">
+        <main className="mt-8 flex flex-col md:flex-row justify-between m-4 ">
+          <div className="flex flex-col max-w-[900px] md:mr-20">
             {posts.length > 0 ? (
               posts
                 .filter((post) => checkURL(post.url))
-                .map((post) => (
-                  <Post
-                    key={post.id}
-                    ups={post.ups}
-                    title={post.title}
-                    thumbnail={post.url}
-                    author={post.author}
-                    dateCreated={convertTime(post.created_utc)}
-                    nbComs={post.num_comments}
-                  />
-                ))
+                .map((post) => <Post key={post.id} post={post} toggleComments={onToggleComments} />)
             ) : (
               <p> There is no post yet </p>
             )}
@@ -71,7 +69,6 @@ const Home = () => {
             handleClick={handleClick}
           />
         </main>
-        <Comment />
       </div>
     </>
   );

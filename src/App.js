@@ -6,7 +6,7 @@ import Home from './pages/Home';
 
 function App() {
   return (
-    <div className="bg-slate-50 h-screen">
+    <div className="overflow-hidden">
       <Home />
       {/* <Header />
       <div className="container mx-auto">

@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import { getHomePost, getPostByTerms } from '../../api/reddit';
+import { getHomePost, getPostByTerms, getPostComments } from '../../api/reddit';
 
 const initialState = {
   posts: [],
@@ -27,7 +27,10 @@ export const fetchPostsByTerm = createAsyncThunk('posts/fetchPostsByTerms', asyn
   return response;
 });
 
-// add fetch posts by term
+export const fetchComments = createAsyncThunk('comments/fetchComments', async (permalink) => {
+  const response = await getPostComments(permalink);
+  return response;
+});
 
 export const postSlice = createSlice({
   name: 'post',
@@ -41,7 +44,11 @@ export const postSlice = createSlice({
       .addCase(fetchPosts.fulfilled, (state, action) => {
         state.isLoading = false;
         state.isSuccess = true;
-        state.posts = action.payload;
+        const loadedPosts = action.payload.map((post) => {
+          post.comments = [];
+          return post;
+        });
+        state.posts = state.posts.concat(loadedPosts);
       })
       .addCase(fetchPosts.rejected, (state, action) => {
         state.isLoading = false;
@@ -60,7 +67,21 @@ export const postSlice = createSlice({
         state.isLoading = false;
         state.isError = true;
         state.message = action.payload;
+      })
+      .addCase(fetchComments.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(fetchComments.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.isSuccess = true;
+        state.posts = action.payload;
+      })
+      .addCase(fetchComments.rejected, (state, action) => {
+        state.isLoading = false;
+        state.isError = true;
+        state.message = action.payload;
       });
   }
 });
+
 export default postSlice.reducer;
