@@ -44,11 +44,7 @@ export const postSlice = createSlice({
       .addCase(fetchPosts.fulfilled, (state, action) => {
         state.isLoading = false;
         state.isSuccess = true;
-        const loadedPosts = action.payload.map((post) => {
-          post.comments = [];
-          return post;
-        });
-        state.posts = state.posts.concat(loadedPosts);
+        state.posts = action.payload;
       })
       .addCase(fetchPosts.rejected, (state, action) => {
         state.isLoading = false;

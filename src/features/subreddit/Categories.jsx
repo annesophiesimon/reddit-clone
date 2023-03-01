@@ -19,13 +19,15 @@ const Categories = (subreddit) => {
       <h1 className="font-bold p-5">Categories</h1>
       <ul className="my-2">
         {subreddits &&
-          subreddits.map((subreddit, index) => (
-            <li key={index} className="px-5 py-2 hover:bg-slate-500/[.06]">
-              <button onClick={handleClick} value={subreddit.display_name_prefixed}>
-                {subreddit.display_name}
-              </button>
-            </li>
-          ))}
+          subreddits
+            .filter((subreddit) => subreddit.display_name !== 'AskReddit')
+            .map((subreddit, index) => (
+              <li key={index} className="px-5 py-2 hover:bg-slate-500/[.06]">
+                <button onClick={handleClick} value={subreddit.display_name_prefixed}>
+                  {subreddit.display_name}
+                </button>
+              </li>
+            ))}
       </ul>
     </aside>
   );

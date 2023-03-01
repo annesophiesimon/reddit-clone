@@ -12,8 +12,7 @@ const Post = (props) => {
 
   useEffect(() => {
     dispatch(fetchPosts(subreddit));
-  }, []);
-
+  }, [subreddit]);
   if (isLoading) {
     return <div>Data loading</div>; // Add spinner
   }

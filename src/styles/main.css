@@ -523,14 +523,14 @@ video {
   margin-top: 0.5rem;
   margin-bottom: 0.5rem;
 }
-.mt-8 {
-  margin-top: 2rem;
-}
 .mb-4 {
   margin-bottom: 1rem;
 }
 .mr-2 {
   margin-right: 0.5rem;
+}
+.mt-8 {
+  margin-top: 2rem;
 }
 .mb-10 {
   margin-bottom: 2.5rem;
