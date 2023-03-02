@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import { getHomePost, getPostByTerms, getPostComments } from '../../api/reddit';
+import { getHomePost, getPostByTerms } from '../../api/reddit';
 
 const initialState = {
   posts: [],
@@ -24,11 +24,6 @@ export const fetchPosts = createAsyncThunk('posts/fetchPosts', async (subreddit,
 
 export const fetchPostsByTerm = createAsyncThunk('posts/fetchPostsByTerms', async (term) => {
   const response = await getPostByTerms(term);
-  return response;
-});
-
-export const fetchComments = createAsyncThunk('comments/fetchComments', async (permalink) => {
-  const response = await getPostComments(permalink);
   return response;
 });
 
@@ -60,19 +55,6 @@ export const postSlice = createSlice({
         state.posts = action.payload;
       })
       .addCase(fetchPostsByTerm.rejected, (state, action) => {
-        state.isLoading = false;
-        state.isError = true;
-        state.message = action.payload;
-      })
-      .addCase(fetchComments.pending, (state) => {
-        state.isLoading = true;
-      })
-      .addCase(fetchComments.fulfilled, (state, action) => {
-        state.isLoading = false;
-        state.isSuccess = true;
-        state.posts = action.payload;
-      })
-      .addCase(fetchComments.rejected, (state, action) => {
         state.isLoading = false;
         state.isError = true;
         state.message = action.payload;

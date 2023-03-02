@@ -2,18 +2,30 @@
 import Vote from '../../components/Vote';
 import { convertTime, checkURL } from '../../helpers';
 import { fetchPosts } from './postSlice';
+import { fetchComments } from '../comments/commentSlice';
 import { useAppSelector, useAppDispatch } from '../../app/hooks';
-import { useEffect } from 'react';
+import Comment from '../comments/Comment';
+import { useEffect, useState } from 'react';
 
 const Post = (props) => {
   const { subreddit } = props;
   const { posts, isLoading } = useAppSelector((state) => state.post);
+  const { comments, isCommentsLoading } = useAppSelector((state) => state.comment);
   const dispatch = useAppDispatch();
+  const [shownComments, setShownComments] = useState({});
 
+  const toggleComment = (id) => {
+    setShownComments((prevShownComments) => ({
+      ...prevShownComments,
+      [id]: !prevShownComments[id]
+    }));
+    const found = posts.find((post) => post.id === id);
+    dispatch(fetchComments(found.permalink));
+  };
   useEffect(() => {
     dispatch(fetchPosts(subreddit));
   }, [subreddit]);
-  if (isLoading) {
+  if (isLoading && isCommentsLoading) {
     return <div>Data loading</div>; // Add spinner
   }
   return (
@@ -45,12 +57,13 @@ const Post = (props) => {
                   </div>
                   <div className="flex justify-between text-sm text-slate-500 px-5">
                     <Vote ups={post.ups} />
-                    <button>
+                    <button onClick={() => toggleComment(post.id)}>
                       <p>
                         {post.num_comments} {post.num_comments > 1 ? `comments` : `comment`}
                       </p>
                     </button>
                   </div>
+                  {shownComments[post.id] ? <Comment comments={comments} /> : null}
                 </div>
               </div>
             </div>
