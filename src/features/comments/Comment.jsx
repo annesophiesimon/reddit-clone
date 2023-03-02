@@ -1,6 +1,6 @@
 import { convertTime } from '../../helpers';
 /* eslint-disable react/prop-types */
-// add nested comment ?
+// add nested comments ?
 const Comment = (props) => {
   const { comments } = props;
   return (
