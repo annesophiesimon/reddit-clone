@@ -41,7 +41,7 @@ describe('convertTime function', () => {
   it('render the past days', () => {
     // set time now minus 49 hours
     let date = new Date();
-    date.setHours(date.getHours() - 49);
+    date.setHours(date.getHours() - 50);
     const time = convertTime(Math.floor(date / 1000));
     expect(time).toEqual('2 days ago');
   });
