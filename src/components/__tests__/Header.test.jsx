@@ -1,9 +1,17 @@
 import Header from '../Header';
-import renderer from 'react-test-renderer';
+import React from 'react';
+import { renderWithProviders } from '../../utils/test-utils';
+import { server } from '../../mocks/handler';
+
+// Enable API mocking before tests.
+beforeEach(() => server.listen());
+
+// Disable API mocking after the tests are done.
+afterAll(() => server.close());
 
 describe('Header', () => {
   it('renders correctly', () => {
-    const tree = renderer.create(<Header />).toJSON();
-    expect(tree).toMatchSnapshot();
+    const header = renderWithProviders(<Header />);
+    expect(header.container).toMatchSnapshot();
   });
 });

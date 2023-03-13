@@ -6,7 +6,8 @@ import {
   resultMockSewing,
   resultMockCrossfit,
   resultMockBachata,
-  resultMockEmptyPost
+  resultMockEmptyPost,
+  resultMockComments
 } from './result';
 
 const API_ROOT = 'https://www.reddit.com';
@@ -27,9 +28,12 @@ export const handlers = [
     } else {
       return res(ctx.status(200), ctx.json(resultMockEmptyPost), ctx.delay(150));
     }
+  }),
+  rest.get(`${API_ROOT}/r/sewing/comments/1/my_completed_coat.json`, (req, res, ctx) => {
+    return res(ctx.status(200), ctx.json(resultMockComments), ctx.delay(150));
   })
 ];
 
-export const server = setupServer(...handlers);
-
+const server = setupServer(...handlers);
+export { server, rest };
 server.listen();

@@ -24,7 +24,7 @@
     "start": "npm run watch:css && react-scripts start",
     "build": "npm run watch:css && react-scripts build",
     "test": "react-scripts test",
-    "coverage": "react-scripts test --coverage --watchAll --collectCoverageFrom='src/{components,pages,helpers}/**/*.{js,jsx}'",
+    "coverage": "react-scripts test --coverage --watchAll --collectCoverageFrom='src/{components,pages,helpers,features}/**/*.{js,jsx}'",
     "eject": "react-scripts eject",
     "watch:css": "postcss src/styles/tailwind.css -o src/styles/main.css",
     "lint": "eslint .",

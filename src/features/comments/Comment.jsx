@@ -5,7 +5,7 @@ const Comment = (props) => {
   const { comments } = props;
   return (
     <>
-      {comments.length > 0 &&
+      {comments?.length > 0 &&
         comments.map((comment, index) => (
           <div key={index} className="bg-[#f2f2f2] shadow-lg p-3 m-5 rounded-lg">
             <div>

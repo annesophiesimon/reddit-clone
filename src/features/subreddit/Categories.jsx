@@ -10,7 +10,6 @@ const Categories = (subreddit) => {
   useEffect(() => {
     dispatch(fetchSubreddit());
   }, []);
-
   if (isCategoriesLoading) {
     return <div>Data loading</div>; // Add spinner
   }
