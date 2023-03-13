@@ -26,3 +26,5 @@ jobs:
     - run: npm i
     - run: npm test
     - run: npm run build --if-present
+    - run: mv /Users/cleanta/Desktop/actions-runner/_work/reddit-clone/reddit-clone/build /Users/cleanta/Desktop/actions-runner/_work/reddit-clone/reddit-clone/redditclone
+    
