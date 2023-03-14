@@ -2,6 +2,7 @@
   "name": "reddit-clone",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://annesophiesimon.github.io/reddit-clone",
   "dependencies": {
     "@emotion/react": "^11.10.5",
     "@emotion/styled": "^11.10.5",
@@ -21,6 +22,7 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
+    "deploy": "gh-pages -d build",
     "start": "npm run watch:css && react-scripts start",
     "build": "npm run watch:css && react-scripts build",
     "test": "react-scripts test",
@@ -54,6 +56,7 @@
     "eslint": "^8.33.0",
     "eslint-config-prettier": "^8.6.0",
     "eslint-plugin-prettier": "^4.2.1",
+    "gh-pages": "^5.0.0",
     "msw": "^1.0.1",
     "postcss-cli": "^10.1.0",
     "prettier": "^2.8.3",
